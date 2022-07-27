@@ -26,9 +26,10 @@
 		box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
 			var(--tw-shadow);
 		line-height: 1.5rem;
+		user-select: none;
 	}
 	.card:hover {
-		--tw-gradient-stops: var(--tw-gradient-from), #f9fafb,
+		--tw-gradient-stops: var(--tw-gradient-from), #edeeff,
 			var(--tw-gradient-to, rgba(249, 250, 251, 0));
 		--tw-gradient-to: #f3f4f6;
 	}

@@ -1,11 +1,8 @@
 <script lang="ts">
 	import gameStore from '$lib/gameStore';
+	import BetHistory from '$lib/kellyGame/BetHistory.svelte';
 	import BetSelectors from '$lib/kellyGame/BetSelectors.svelte';
 	import Card from '$lib/kellyGame/Card.svelte';
-
-	const bet = () => {
-		gameStore.betPercentage(0.2);
-	};
 </script>
 
 <div class="container">
@@ -20,12 +17,7 @@
 				chance of losing all of what you bet. How would you bet in order to maximize the amount of
 				money in the shortest amount of time?
 			</p>
-			<div>
-				{#each $gameStore.history as val}
-					<div>{val}</div>
-				{/each}
-			</div>
-
+			<BetHistory history={$gameStore.history} />
 			<BetSelectors />
 		</div>
 		<div>Chart</div>

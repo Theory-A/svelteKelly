@@ -23,7 +23,7 @@
 			<Card
 				on:click={() => bet(choice)}
 				on:mouseenter={() => (selectedBet = choice)}
-				on:mouseleave={(e) => (selectedBet = 0)}
+				on:mouseleave={() => (selectedBet = 0)}
 			>
 				{choice * 100}%
 			</Card>
