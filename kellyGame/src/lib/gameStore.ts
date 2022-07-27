@@ -45,7 +45,7 @@ function createGameState() {
 
 	const state = derived([balanceStore, historyStore], ([$balance, $history]) => {
 		return {
-			balance: $balance,
+			balance: Math.round($balance * 100) / 100,
 			history: $history
 		};
 	});

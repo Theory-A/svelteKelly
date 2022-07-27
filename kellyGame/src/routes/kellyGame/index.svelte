@@ -1,5 +1,7 @@
 <script lang="ts">
 	import gameStore from '$lib/gameStore';
+	import BetSelectors from '$lib/kellyGame/BetSelectors.svelte';
+	import Card from '$lib/kellyGame/Card.svelte';
 
 	const bet = () => {
 		gameStore.betPercentage(0.2);
@@ -11,7 +13,7 @@
 	<div class="content">
 		<div class="controls">
 			<h2>
-				Current Balance: {$gameStore.balance}
+				Current Balance: <Card>{$gameStore.balance}</Card>
 			</h2>
 			<p>
 				Each round you have a 60% chance to win and double what you bet and a corresponding 40%
@@ -23,11 +25,8 @@
 					<div>{val}</div>
 				{/each}
 			</div>
-			<div>
-				<div>You are betting ....</div>
-				<div on:click={bet}>bet</div>
-				<div>CARDs</div>
-			</div>
+
+			<BetSelectors />
 		</div>
 		<div>Chart</div>
 	</div>
