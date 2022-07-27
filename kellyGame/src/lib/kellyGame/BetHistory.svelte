@@ -1,14 +1,14 @@
 <script lang="ts">
 	// Test passing props
-	export let history: number[];
+	export let winHistory: number[];
 
-	$: numWins = history.filter((each) => each === 1).length;
-	$: realizedWinPercentage = `${Math.round((numWins / history.length) * 100 * 100) / 100}%`;
+	$: numWins = winHistory.filter((each) => each === 1).length;
+	$: realizedWinPercentage = `${Math.round((numWins / winHistory.length) * 100 * 100) / 100}%`;
 </script>
 
 <div class="container">
 	<div class="results">
-		{#each history as result}
+		{#each winHistory as result}
 			{#if result === 1}
 				<span class="box win" />
 			{:else}
@@ -17,7 +17,7 @@
 		{/each}
 	</div>
 	<h2>
-		{numWins} wins over {history.length} total flips
+		{numWins} wins over {winHistory.length} total flips
 	</h2>
 	<h2>
 		Realized Win Percentage: {realizedWinPercentage}

@@ -23,14 +23,8 @@
 body {
 	min-height: 100vh;
 	margin: 0;
-	/* background-color: var(--primary-color); */
+	color: var(--heading-color);
 	background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-	/* background: linear-gradient(
-		180deg,
-		var(--primary-color) 0%,
-		var(--secondary-color) 10.45%,
-		var(--tertiary-color) 41.35%
-	); */
 }
 
 body::before {

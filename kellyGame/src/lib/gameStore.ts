@@ -1,18 +1,17 @@
 import { derived, writable } from 'svelte/store';
 
-const INITIAL_BALANCE = 100;
+export const INITIAL_BALANCE = 100;
 const WIN_PERCENT = 0.6;
 
 function createGameState() {
-	// const { subscribe: balance, set: setBalance, update: updateBalance } = writable(INITIAL_BALANCE);
-
-	// const { subscribe: history, set: setHistory, update: updateHistory } = writable<number[]>([]);
-
 	const balanceStore = writable(INITIAL_BALANCE);
-	const { subscribe: balance, set: setBalance, update: updateBalance } = balanceStore;
+	const { set: setBalance, update: updateBalance } = balanceStore;
 
-	const historyStore = writable<number[]>([]);
-	const { subscribe: history, set: setHistory, update: updateHistory } = historyStore;
+	const winHistoryStore = writable<number[]>([]);
+	const { set: setWinHistory, update: updateWinHistory } = winHistoryStore;
+
+	const balanceHistoryStore = writable<number[]>([INITIAL_BALANCE]);
+	const { set: setBalanceHistory, update: updateBalanceHistory } = balanceHistoryStore;
 
 	/**
 	 * Bet a percentage (0-1) of the current balance. Double the winnings if the bet is won.
@@ -23,32 +22,37 @@ function createGameState() {
 		const win = rand < WIN_PERCENT;
 		if (win) {
 			updateBalance((balance) => {
-				return balance * (1 - percent) + percent * balance * 2;
+				const newBalance = balance * (1 - percent) + percent * balance * 2;
+				updateBalanceHistory((balanceHistory) => [...balanceHistory, newBalance]);
+				return newBalance;
 			});
-			updateHistory((history) => {
-				return [...history, 1]; // 1 means win
-			});
+			updateWinHistory((winHistory) => [...winHistory, 1]); // 1 means win
 		} else {
 			updateBalance((balance) => {
-				return balance * (1 - percent);
+				const newBalance = balance * (1 - percent);
+				updateBalanceHistory((balanceHistory) => [...balanceHistory, newBalance]);
+				return newBalance;
 			});
-			updateHistory((history) => {
-				return [...history, 0]; // 0 means loss
-			});
+			updateWinHistory((winHistory) => [...winHistory, 0]); // 0 means loss
 		}
 	};
 
 	const reset = () => {
 		setBalance(INITIAL_BALANCE);
-		setHistory([]);
+		setWinHistory([]);
+		setBalanceHistory([]);
 	};
 
-	const state = derived([balanceStore, historyStore], ([$balance, $history]) => {
-		return {
-			balance: Math.round($balance * 100) / 100,
-			history: $history
-		};
-	});
+	const state = derived(
+		[balanceStore, winHistoryStore, balanceHistoryStore],
+		([$balance, $winHistory, $balanceHistory]) => {
+			return {
+				balance: Math.round($balance * 100) / 100,
+				winHistory: $winHistory,
+				balanceHistory: $balanceHistory
+			};
+		}
+	);
 
 	return {
 		subscribe: state.subscribe,

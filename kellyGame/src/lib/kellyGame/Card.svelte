@@ -9,9 +9,10 @@
 		align-items: center;
 		box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
 			rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-		padding: 0.75em 1em;
+		padding: 0.5em 0.75em;
 		cursor: pointer;
-		font-size: 0.9rem;
+		font-size: 1rem;
+		font-weight: bold;
 		color: var(--heading-color);
 		--tw-border-opacity: 1;
 		--tw-gradient-stops: var(--tw-gradient-from), #fff, var(--tw-gradient-to, hsla(0, 0%, 100%, 0));
