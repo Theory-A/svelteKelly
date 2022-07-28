@@ -30,8 +30,12 @@
 
 			<div>
 				The same is true when always betting 50% or 70%. Though you may make a lot of money in the
-				short run, betting too high of an amount asymptomatically leads to 100% chance of ruin. For
-				more information, check out our in-depth article here.
+				short run, betting too high of an amount asymptomatically leads to 100% chance of ruin.
+			</div>
+
+			<div>
+				Can you stomach the volatility for a real world scenario where you can never know the true
+				odds?
 			</div>
 			<div class="btn">
 				<Button on:click={onClose}>OK</Button>
