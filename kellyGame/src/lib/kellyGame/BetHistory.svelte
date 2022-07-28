@@ -31,14 +31,14 @@
 	}
 	.box {
 		display: inline-block;
-		width: 1em;
-		height: 1em;
+		width: 0.5em;
+		height: 0.5em;
 		border: 1px solid white;
 	}
 	.win {
 		background-color: #34d399ee;
 	}
 	.loss {
-		background-color: #991b1bee;
+		background-color: #f47372ee;
 	}
 </style>
