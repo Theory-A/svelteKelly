@@ -110,6 +110,7 @@
 
 	.content {
 		display: flex;
+		height: 600px;
 	}
 
 	.content > div {
@@ -117,7 +118,6 @@
 	}
 
 	.controls {
-		height: 60vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
