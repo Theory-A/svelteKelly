@@ -4,6 +4,7 @@
 	import BetHistory from '$lib/kellyGame/BetHistory.svelte';
 	import BetSelectors from '$lib/kellyGame/BetSelectors.svelte';
 	import Card from '$lib/kellyGame/Card.svelte';
+	import Chart from '$lib/kellyGame/Chart.svelte';
 	import { round } from 'lodash';
 
 	$: balanceHistory = $gameStore.balanceHistory;
@@ -45,7 +46,7 @@
 							<td>After {$gameStore.winHistory.length} flips you are:</td>
 							<td>
 								<Card color={totalGains && totalGains < 0 ? '#f47372' : '#04b885'}>
-									{totalGains}%
+									{#if totalGains > 0}+{/if}{totalGains}%
 								</Card>
 							</td>
 						</tr>
@@ -63,7 +64,12 @@
 			</div>
 			<BetSelectors />
 		</div>
-		<div>Chart</div>
+		<div>
+			<div class="chart-header">
+				<Card>${$gameStore.balance.toLocaleString()}</Card>
+			</div>
+			<Chart values={$gameStore.balanceHistory} />
+		</div>
 	</div>
 </div>
 
@@ -97,5 +103,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+	}
+
+	.chart-header {
+		text-align: center;
 	}
 </style>
