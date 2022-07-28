@@ -5,6 +5,7 @@
 	import BetSelectors from '$lib/kellyGame/BetSelectors.svelte';
 	import Card from '$lib/kellyGame/Card.svelte';
 	import Chart from '$lib/kellyGame/Chart.svelte';
+	import Solution from '$lib/kellyGame/Solution.svelte';
 	import _ from 'lodash';
 
 	$: balanceHistory = $gameStore.balanceHistory;
@@ -13,12 +14,15 @@
 	$: lastFlipResult = previousBalance && _.round($gameStore.balance - previousBalance, 2);
 	$: totalGains = _.round(($gameStore.balance / INITIAL_BALANCE) * 100 - 100);
 	$: gameIsActive = balanceHistory.length > 1;
+
+	let showSolution = false;
 </script>
 
 <div class="container">
 	<div class="header">
 		<h1>Kelly Criterion Game</h1>
 		<Button on:click={gameStore.reset}>Reset</Button>
+		<Button on:click={() => (showSolution = true)}>Solution</Button>
 	</div>
 	<div class="content">
 		<div class="controls">
@@ -75,6 +79,7 @@
 			<Chart values={$gameStore.balanceHistory} />
 		</div>
 	</div>
+	<Solution show={showSolution} onClose={() => (showSolution = false)} />
 </div>
 
 <style>
