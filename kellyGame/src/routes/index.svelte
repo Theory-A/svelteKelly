@@ -13,7 +13,7 @@
 		balanceHistory.length > 1 ? _.round(balanceHistory[balanceHistory.length - 2], 2) : null;
 	$: lastFlipResult = previousBalance && _.round($gameStore.balance - previousBalance, 2);
 	$: totalGains = _.round(($gameStore.balance / INITIAL_BALANCE) * 100 - 100);
-	$: gameIsActive = balanceHistory.length > 1;
+	$: gameIsActive = $gameStore.winHistory.length > 0;
 
 	let showSolution = false;
 </script>
@@ -59,7 +59,7 @@
 						</tr>
 					{/if}
 				</table>
-				{#if $gameStore.winHistory.length > 0}
+				{#if gameIsActive}
 					<BetHistory winHistory={$gameStore.winHistory} />
 				{:else}
 					<p>

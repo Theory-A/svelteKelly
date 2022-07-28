@@ -40,7 +40,7 @@ function createGameState() {
 	const reset = () => {
 		setBalance(INITIAL_BALANCE);
 		setWinHistory([]);
-		setBalanceHistory([]);
+		setBalanceHistory([INITIAL_BALANCE]);
 	};
 
 	const state = derived(
