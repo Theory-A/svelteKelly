@@ -16,7 +16,10 @@
 </script>
 
 <div class="container">
-	<h1>Kelly Criterion Game <Button on:click={gameStore.reset}>Reset</Button></h1>
+	<div class="header">
+		<h1>Kelly Criterion Game</h1>
+		<Button on:click={gameStore.reset}>Reset</Button>
+	</div>
 	<div class="content">
 		<div class="controls">
 			<div class="top-section">
@@ -80,10 +83,20 @@
 		margin: var(--column-margin-top) auto 0 auto;
 	}
 
+	.header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	h1 {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-image: linear-gradient(120deg, rgba(26, 34, 237, 1) 0%, rgba(255, 0, 138, 1) 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 
 	td {

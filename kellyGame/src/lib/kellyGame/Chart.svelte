@@ -52,16 +52,6 @@
 			chartHandle.update();
 		}
 	}
-
-	// const unsubscribe = gameStore.subscribe(({ balanceHistory }) => {
-	// 	if (chartHandle) {
-	// 		chartHandle.data.datasets[0].data = balanceHistory;
-	// 		chartHandle.data.labels = balanceHistory.map((each, i) => i);
-	// 		chartHandle.update();
-	// 	}
-	// });
-
-	// onDestroy(unsubscribe);
 </script>
 
 <div class="container">

@@ -12,8 +12,8 @@
 		--tw-text-opacity: 1;
 		color: rgba(31, 41, 55, var(--tw-text-opacity));
 		background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
-		padding: 0.3em;
-		font-size: 0.4em;
+		padding: 0.2em 0.4em;
+		font-size: 1em;
 		border-radius: 0.2em;
 		border: 1px solid lightgrey;
 		cursor: pointer;
