@@ -2,27 +2,20 @@
 </script>
 
 <header>
-	<div class="corner" />
-
-	<nav />
-
-	<div class="corner">https://github.com/Theory-A/svelteKelly</div>
+	<picture>
+		<a href="https://github.com/Theory-A/svelteKelly" target="_blank">
+			<img src="github-corner-right.svg" alt="Welcome" />
+		</a>
+	</picture>
 </header>
 
 <style>
 	header {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: row-reverse;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+	picture {
+		cursor: pointer;
 	}
 </style>
