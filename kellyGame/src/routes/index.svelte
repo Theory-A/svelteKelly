@@ -5,13 +5,13 @@
 	import BetSelectors from '$lib/kellyGame/BetSelectors.svelte';
 	import Card from '$lib/kellyGame/Card.svelte';
 	import Chart from '$lib/kellyGame/Chart.svelte';
-	import { round } from 'lodash';
+	import _ from 'lodash';
 
 	$: balanceHistory = $gameStore.balanceHistory;
 	$: previousBalance =
-		balanceHistory.length > 1 ? round(balanceHistory[balanceHistory.length - 2], 2) : null;
-	$: lastFlipResult = previousBalance && round($gameStore.balance - previousBalance, 2);
-	$: totalGains = round(($gameStore.balance / INITIAL_BALANCE) * 100 - 100);
+		balanceHistory.length > 1 ? _.round(balanceHistory[balanceHistory.length - 2], 2) : null;
+	$: lastFlipResult = previousBalance && _.round($gameStore.balance - previousBalance, 2);
+	$: totalGains = _.round(($gameStore.balance / INITIAL_BALANCE) * 100 - 100);
 	$: gameIsActive = balanceHistory.length > 1;
 </script>
 
