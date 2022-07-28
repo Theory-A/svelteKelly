@@ -1,61 +1,133 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
-	import Counter from '$lib/Counter.svelte';
+	import Button from '$lib/Button.svelte';
+	import gameStore, { INITIAL_BALANCE } from '$lib/gameStore';
+	import BetHistory from '$lib/kellyGame/BetHistory.svelte';
+	import BetSelectors from '$lib/kellyGame/BetSelectors.svelte';
+	import Card from '$lib/kellyGame/Card.svelte';
+	import Chart from '$lib/kellyGame/Chart.svelte';
+	import { round } from 'lodash';
+
+	$: balanceHistory = $gameStore.balanceHistory;
+	$: previousBalance =
+		balanceHistory.length > 1 ? round(balanceHistory[balanceHistory.length - 2], 2) : null;
+	$: lastFlipResult = previousBalance && round($gameStore.balance - previousBalance, 2);
+	$: totalGains = round(($gameStore.balance / INITIAL_BALANCE) * 100 - 100);
+	$: gameIsActive = balanceHistory.length > 1;
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
+<div class="container">
+	<div class="header">
+		<h1>Kelly Criterion Game</h1>
+		<Button on:click={gameStore.reset}>Reset</Button>
+	</div>
+	<div class="content">
+		<div class="controls">
+			<div class="top-section">
+				<table>
+					{#if gameIsActive}
+						<tr>
+							<td>Previous Balance:</td>
+							<td><Card>{previousBalance?.toLocaleString()}</Card></td>
+						</tr>
+					{/if}
+					{#if gameIsActive}
+						<tr>
+							<td>Result from Last Flip:</td>
+							<td>
+								<Card color={lastFlipResult && lastFlipResult < 0 ? '#f47372' : '#04b885'}>
+									${lastFlipResult?.toLocaleString()}
+								</Card>
+							</td>
+						</tr>
+					{/if}
+					<tr>
+						<td>Current Balance: </td>
+						<td><Card>${$gameStore.balance.toLocaleString()}</Card></td>
+					</tr>
+					{#if gameIsActive}
+						<tr>
+							<td>After {$gameStore.winHistory.length} flips you are:</td>
+							<td>
+								<Card color={totalGains && totalGains < 0 ? '#f47372' : '#04b885'}>
+									{#if totalGains > 0}+{/if}{totalGains}%
+								</Card>
+							</td>
+						</tr>
+					{/if}
+				</table>
+				{#if $gameStore.winHistory.length > 0}
+					<BetHistory winHistory={$gameStore.winHistory} />
+				{:else}
+					<p>
+						Each round you have a <b>60%</b> chance to win and double what you bet and a
+						corresponding <b>40%</b>
+						chance of losing all of what you bet. How would you bet in order to maximize the amount of
+						money in the shortest amount of time?
+					</p>
+				{/if}
+			</div>
+			<BetSelectors />
+		</div>
+		<div>
+			<div class="chart-header">
+				<Card>${$gameStore.balance.toLocaleString()}</Card>
+			</div>
+			<Chart values={$gameStore.balanceHistory} />
+		</div>
+	</div>
+</div>
 
 <style>
-	section {
+	.container {
+		width: 100%;
+		max-width: 2560px;
+	}
+
+	.header {
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		flex: 1;
 	}
 
 	h1 {
-		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-image: linear-gradient(120deg, rgba(26, 34, 237, 1) 0%, rgba(255, 0, 138, 1) 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+	td {
+		padding-bottom: 0.5em;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+	.content {
+		display: flex;
+	}
+
+	.content > div {
+		flex-basis: 50%;
+	}
+
+	.controls {
+		height: 60vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.chart-header {
+		text-align: center;
+	}
+
+	@media (max-width: 800px) {
+		.content {
+			flex-direction: column;
+		}
+		.controls {
+			margin-bottom: 4em;
+		}
 	}
 </style>
