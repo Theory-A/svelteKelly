@@ -17,10 +17,10 @@
 		{/each}
 	</div>
 	<h2>
-		{numWins} wins over {winHistory.length} total flips
+		<b>{numWins}</b> wins over <b>{winHistory.length}</b> total flips
 	</h2>
 	<h2>
-		Realized Win Percentage: {realizedWinPercentage}
+		Realized Win Percentage: <b>{realizedWinPercentage}</b>
 	</h2>
 </div>
 

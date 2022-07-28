@@ -14,9 +14,8 @@
 <div>
 	<h2>Choose how much to bet:</h2>
 	<h2>
-		You are betting {selectedBet * 100}% of your balance of {$gameStore.balance} which is {Math.round(
-			selectedBet * $gameStore.balance
-		)}
+		You are betting <b>{selectedBet * 100}%</b> of your balance of <b>{$gameStore.balance}</b> which
+		is <b>{Math.round(selectedBet * $gameStore.balance)}</b>
 	</h2>
 	<div class="row">
 		{#each betChoices as choice}

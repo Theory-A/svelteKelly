@@ -59,9 +59,10 @@
 					<BetHistory winHistory={$gameStore.winHistory} />
 				{:else}
 					<p>
-						Each round you have a 60% chance to win and double what you bet and a corresponding 40%
-						chance of losing all of what you bet. How would you bet in order to maximize the amount
-						of money in the shortest amount of time?
+						Each round you have a <b>60%</b> chance to win and double what you bet and a
+						corresponding <b>40%</b>
+						chance of losing all of what you bet. How would you bet in order to maximize the amount of
+						money in the shortest amount of time?
 					</p>
 				{/if}
 			</div>
@@ -120,5 +121,14 @@
 
 	.chart-header {
 		text-align: center;
+	}
+
+	@media (max-width: 800px) {
+		.content {
+			flex-direction: column;
+		}
+		.controls {
+			margin-bottom: 4em;
+		}
 	}
 </style>
