@@ -37,7 +37,8 @@
 						},
 						y: {
 							display: true,
-							type: 'logarithmic'
+							type: 'logarithmic',
+							suggestedMin: 0
 						}
 					}
 				}
