@@ -4,4 +4,4 @@ Game that models the [Kelly Criterion](https://en.wikipedia.org/wiki/Kelly_crite
 
 # Deployment
 
-[Deployment](https://www.svelte-kelly.vercel.app)
+[Deployment](https://svelte-kelly.vercel.app/)
