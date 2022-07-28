@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let values: number[];
-	import Chart from 'chart.js/auto';
+	import Chart from 'chart.js/auto/auto.esm';
 	import { onMount } from 'svelte';
 
 	let canvas: HTMLCanvasElement;
