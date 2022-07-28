@@ -10,7 +10,9 @@
 </main>
 
 <footer>
-	<p>footer</p>
+	<picture>
+		<img src="huggingFace.svg" alt="Welcome" />
+	</picture>
 </footer>
 
 <style>
@@ -31,10 +33,6 @@
 		justify-content: center;
 		align-items: center;
 		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
 	}
 
 	@media (min-width: 480px) {
